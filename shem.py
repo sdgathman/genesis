@@ -2,6 +2,7 @@ import csv
 
 # possible anchors to compute BC dates
 CARTHAGE = 814	
+#CARTHAGE = 825	
 REBUILD = 457
 CHRISTMAS = 4
 

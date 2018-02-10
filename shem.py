@@ -1,3 +1,5 @@
+#!/usr/bin/python2
+
 import csv
 
 # possible anchors to compute BC dates
@@ -13,12 +15,13 @@ def toJul(am):
   return '%4dAD'%(1-bc)
 
 class event(object):
-  def __init__(self,par,age,name,ref,comment = None):
+  def __init__(self,par,age,name,ref,comment = None,same=None):
     self.parent = par
     self.age = age
     self.name = name
     self.ref = ref
     self.comment = comment
+    self.next = same
 
   def birthday(self):
     if not self.parent: return 0
@@ -30,7 +33,11 @@ class event(object):
 
   def __str__(self):
     AM = self.birthday()
-    return '%4d %s'%(AM,toJul(AM))+' '*self.indent()+'%3d %s %s'%(
+    try:
+      bc = toJul(AM)
+    except:
+      bc = '----BC'
+    return '%4d %s'%(AM,bc)+' '*self.indent()+'%3d %s %s'%(
         self.age,self.name,self.ref)
 
 def load(fp):
@@ -45,6 +52,7 @@ def load(fp):
       while len(row) < 5:
         row.append('')
       par = row[0]
+      if par.startswith('#'): continue
       n = row[1]
       age = int(n)
       if n.startswith('+'):
@@ -57,8 +65,17 @@ def load(fp):
         p = d[par]
       if not name:
         name = '~'+p.name
-      assert name not in d
-      d[name] = event(p,age,name,ref,row[4])
+      if name in d:
+        same = d[name]  # same event
+      else:
+        same = None
+      cur = event(p,age,name,ref,row[4],same)
+      d[name] = cur
+      if same:
+        try:
+          assert same.birthday() == cur.birthday()
+        except:
+          print name,cur,same
     return d
 
 with open('shem.dat','r') as fp:
@@ -67,6 +84,11 @@ with open('shem.dat','r') as fp:
     #BC = d['decree to rebuild Jerusalem'].birthday() + REBUILD
     #BC = d['Jesus'].birthday() + CHRISTMAS
     l = d.values()
+    for e in l:
+      n = e.next
+      while n:
+        l.append(n)
+        n = n.next
     l.sort(key=lambda x: x.birthday())
     for v in l:
       print v

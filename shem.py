@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 
 import csv
 
@@ -43,7 +43,7 @@ class event(object):
 def load(fp):
     "Adam,130,Seth,5:3"
     r = csv.reader(fp)
-    h = r.next()    # header
+    h = r.__next__()    # header
     d = {}
     a = event(None,0,'Adam','1:7')
     d[a.name] = a
@@ -75,7 +75,7 @@ def load(fp):
         try:
           assert same.birthday() == cur.birthday()
         except:
-          print name,cur,same
+          print(name,cur,same)
     return d
 
 with open('shem.dat','r') as fp:
@@ -83,7 +83,7 @@ with open('shem.dat','r') as fp:
     BC = d['Carthage'].birthday() + CARTHAGE
     #BC = d['decree to rebuild Jerusalem'].birthday() + REBUILD
     #BC = d['Jesus'].birthday() + CHRISTMAS
-    l = d.values()
+    l = list(d.values())
     for e in l:
       n = e.next
       while n:
@@ -91,4 +91,4 @@ with open('shem.dat','r') as fp:
         n = n.next
     l.sort(key=lambda x: x.birthday())
     for v in l:
-      print v
+      print(v)

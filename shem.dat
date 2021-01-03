@@ -87,7 +87,7 @@ Moses,40,kills Egyptian and flees,Acts 7:23
 ,80,exodus,Exo 7:7
 ,120,,Joshua takes over
 exodus,480,temple,1 Kings 6:1
-temple,143,Carthage,,Josephus
+temple,143,Dido leaves Tyre,,Josephus
 ,-12,Hiram rules Tyre,,Josephus
 ,-40,David crowned,1 Kings 2:11
 David crowned,-40,Saul annointed,Acts 13:21
@@ -95,8 +95,14 @@ David crowned,-40,Saul annointed,Acts 13:21
 Saul annointed,8,sabbaths neglected,make Cyrus 539 BC
 ,428,Jerusalem destroyed,2 Chronicles 36:21
 ,498,Cyrus' decree of return
-,+82,decree to rebuild Jerusalem
+,+93,decree to rebuild Jerusalem
 David,70
+Dido leaves Tyre,11,Carthage
+Carthage,-29,Pygmalion,,FIXME: hint - work backwards
+Pygmalion,12,Pygmalion reigns
+,+6,Dido leaves Tyre,Against Apion i.18,Menander
+,+17,Carthage 
+,56
 decree to rebuild Jerusalem,49,Jerusalem rebuilt,Daniel 9:25
 ,483,Jesus annointed,Daniel 9:25
 Jesus annointed,-30,Jesus
